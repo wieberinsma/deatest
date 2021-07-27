@@ -4,8 +4,7 @@ public class FizzBuzzRunner {
         var fizzBuzzExecutor = new FizzBuzzExecutor();
 
         for (int i = 1; i <= 100; ++i) {
-            var result = fizzBuzzExecutor.execute(i);
-            System.out.println(result);
+            System.out.println(fizzBuzzExecutor.execute(i));
         }
     }
 }
