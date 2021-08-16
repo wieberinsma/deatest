@@ -92,7 +92,7 @@ public class StringCalculator
 
     private String[] getDelimiterArray(String delimiters)
     {
-        if (delimiters.contains("]["))
+        if (delimiters.contains("][") && !delimiters.equals("]["))
         {
             return delimiters.substring(1, delimiters.length() - 1).split("]\\[");
         }
@@ -104,11 +104,7 @@ public class StringCalculator
 
     private String getDelimiterRegexForArray(String[] delimiters)
     {
-        List<String> delimiterList = Arrays.stream(delimiters)
-                .filter(d -> !d.isBlank())
-                .map(Pattern::quote)
-                .collect(Collectors.toList());
-
+        List<String> delimiterList = Arrays.stream(delimiters).map(Pattern::quote).collect(Collectors.toList());
         return "(" + String.join("|", delimiterList) + ")+";
     }
 
