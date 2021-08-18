@@ -1,3 +1,5 @@
+package junit;
+
 public class FizzBuzzRunner
 {
     public static void main(String[] args)
