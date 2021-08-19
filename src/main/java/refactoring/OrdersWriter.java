@@ -2,73 +2,46 @@ package refactoring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrdersWriter {
-    private final Orders orders;
+    private final Orders ordersWrapper;
 
-    private static final List<String> availableSizes = List.of("XS", "S", "M", "L", "XL", "XXL");
-
-    private static final List<String> availableColors = List.of("blue", "red", "yellow");
-
-    public OrdersWriter(Orders orders) {
-        this.orders = orders;
+    public OrdersWriter(Orders ordersWrapper) {
+        this.ordersWrapper = ordersWrapper;
     }
 
     public String getContents() {
-        return "{\"orders\": ["  + getOrderArray(orders) + "]}";
+        return ordersWrapper.asJson(getOrdersAsJson());
     }
 
-    private String getOrderArray(Orders orders) {
+    private String getOrdersAsJson() {
         List<String> ordersAsJson = new ArrayList<>();
 
-        for (Order order : orders.getOrders()) {
-            ordersAsJson.add(
-                    "{" +
-                        "\"id\": " + order.getOrderId() + ", " +
-                        "\"products\": [" + getProductArray(order.getProducts()) + "]" +
-                    "}");
+        for (Order order : ordersWrapper.getOrders()) {
+            String productsAsJson = getProductsAsJson(order.getProducts());
+            ordersAsJson.add(order.asJson(productsAsJson));
         }
 
         return String.join(", ", ordersAsJson);
     }
 
-    private String getProductArray(List<Product> products) {
+    private String getProductsAsJson(List<Product> products) {
         List<String> productsAsJson = new ArrayList<>();
 
         for (Product product : products) {
-            int color = product.getColor();
-            int size = product.getSize();
-
-            productsAsJson.add(
-                    "{" +
-                        "\"code\": \"" + product.getCode() + "\", " +
-                        (hasData(color) ? "\"color\": \"" + calculateColor(color) + "\", " : "") +
-                        (hasData(size) ? "\"size\": \"" + calculateSize(size) + "\", " : "") +
-                        "\"price\": " + product.getPrice() + ", " +
-                        "\"currency\": \"" + product.getCurrency() + "\"" +
-                    "}");
+            productsAsJson.add(product.asJson());
         }
 
         return String.join(", ", productsAsJson);
     }
 
-    private boolean hasData(int value) {
-        return value != -1;
-    }
-
-    private String calculateColor(int color) {
-        return validColor(color) ? availableColors.get(color - 1) : "no color";
-    }
-
-    private boolean validColor(int color) {
-        return color > 0 && color <= availableColors.size();
-    }
-
-    private String calculateSize(int size) {
-        return validSize(size) ? availableSizes.get(size - 1) : "Invalid Size";
-    }
-
-    private boolean validSize(int size) {
-        return size > 0 && size <= availableSizes.size();
-    }
+//    private String getOrdersAsJson() {
+//        return ordersWrapper.getOrders().stream().map(order -> order.asJson(getProductsAsJson(order.getProducts())))
+//                .collect(Collectors.joining(", "));
+//    }
+//
+//    private String getProductsAsJson(List<Product> products) {
+//        return products.stream().map(Product::asJson).collect(Collectors.joining(", "));
+//    }
 }

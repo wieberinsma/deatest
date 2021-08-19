@@ -13,4 +13,12 @@ public class Orders {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public String asJson(String ordersAsJson) {
+        return "{" +
+                    "\"orders\": ["  +
+                        ordersAsJson +
+                    "]" +
+                "}";
+    }
 }

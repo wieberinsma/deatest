@@ -23,4 +23,13 @@ public class Order {
     public List<Product> getProducts() {
         return products;
     }
+
+    public String asJson(String productsAsJson) {
+        return "{" +
+                    "\"id\": " + getOrderId() + ", " +
+                    "\"products\": [" +
+                        productsAsJson +
+                    "]" +
+                "}";
+    }
 }
