@@ -78,7 +78,7 @@ public class StreamsTest {
         String foundString = sut.createAFullSentenceFromTheList(input);
 
         // Assert
-        Assertions.assertEquals("Welcome to Java 8 Streams", foundString);
+        Assertions.assertEquals("Welcome to Java 12 Streams", foundString);
     }
 
     @Test
