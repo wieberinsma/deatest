@@ -3,6 +3,7 @@ package http;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.stream.Collectors;
 
 public class ConnectionHandler {
@@ -12,19 +13,6 @@ public class ConnectionHandler {
             "HttpServer: Simple DEA Webserver\n" +
             "Content-Length: 190\n" +
             "Content-Type: text/html\n";
-
-    private static final String HTTP_BODY = "<!DOCTYPE html>\n" +
-            "<html lang=\"en\">\n" +
-            "<head>\n" +
-            "<meta charset=\"UTF-8\">\n" +
-            "<title>Simple Http Server</title>\n" +
-            "</head>\n" +
-            "<body>\n" +
-            "<h1>Hi DEA folks!</h1>\n" +
-            "<p>This is a simple line in html.</p>\n" +
-            "</body>\n" +
-            "</html>\n" +
-            "\n";
 
     private Socket socket;
 
@@ -48,30 +36,27 @@ public class ConnectionHandler {
     }
 
     private void parseRequest(BufferedReader inputStreamReader) throws IOException {
-        var lines = inputStreamReader.lines();
+        var request = inputStreamReader.readLine();
 
-        for (String line : lines.collect(Collectors.toList())) {
-            System.out.println(line);
+        while (request != null && !request.isEmpty()) {
+            System.out.println(request);
+            request = inputStreamReader.readLine();
         }
-
-//        var request = inputStreamReader.readLine();
-//
-//        while (request != null && !request.isEmpty()) {
-//            System.out.println(request);
-//            request = inputStreamReader.readLine();
-//        }
     }
 
     private void writeResponse(BufferedWriter outputStreamWriter) {
         try {
+            var pageReader = new HtmlPageReader();
+
             outputStreamWriter.write(HTTP_HEADER);
             outputStreamWriter.newLine();
-            outputStreamWriter.write(HTTP_BODY);
+            outputStreamWriter.write(pageReader.readFile("index.html"));
             outputStreamWriter.newLine();
             outputStreamWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+
 }
