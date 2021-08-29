@@ -36,6 +36,16 @@
             <artifactId>maven-plugin-annotations</artifactId>
         </dependency>
 
+        <!-- System -->
+        <dependency>
+            <groupId>nl.han.ica.oose.dea</groupId>
+            <artifactId>exercise-refactoring</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/exercise-refactoring-1.0.jar</systemPath>
+        </dependency>
+
+        <!-- Import -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
