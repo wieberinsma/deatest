@@ -8,11 +8,13 @@
     <artifactId>deatest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <parent>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-parent</artifactId>
-        <version>34</version>
-    </parent>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>12</maven.compiler.source>
+        <maven.compiler.target>12</maven.compiler.target>
+        <commons.math3.version>3.6.1</commons.math3.version>
+    </properties>
 
     <build>
         <plugins>
@@ -29,6 +31,12 @@
         </plugins>
     </build>
 
+    <parent>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-parent</artifactId>
+        <version>34</version>
+    </parent>
+
     <dependencies>
         <!-- From parent POM -->
         <dependency>
@@ -42,14 +50,13 @@
             <artifactId>exercise-refactoring</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/exercise-refactoring-1.0.jar</systemPath>
+            <systemPath>${project.basedir}/../exercise-refactoring-1.0.jar</systemPath>
         </dependency>
 
-        <!-- Import -->
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons.math3.version}</version>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -77,16 +84,6 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
     </dependencies>
-
-    <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
-    </properties>
 
 </project>
