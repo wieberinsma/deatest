@@ -1,10 +1,11 @@
 package threads;
 
-public class NumberUnderTest {
-
+public class NumberUnderTest
+{
     private int number;
 
-    public synchronized int getNumber() {
+    public synchronized int getNumber()
+    {
         return number++;
     }
 }

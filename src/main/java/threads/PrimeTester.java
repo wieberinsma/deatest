@@ -6,27 +6,33 @@ import threads.exceptions.OuchIFoundThirtySevenAndHenceMustDieException;
 
 import java.util.List;
 
-public class PrimeTester {
-
+public class PrimeTester
+{
     private final NumberUnderTest numberUnderTest;
     private final int highestNumberToTest;
     private final List<Integer> unluckyNumbers = List.of(37, 101, 821, 1303);
 
-    public PrimeTester(NumberUnderTest numberUnderTest, int highestNumberToTest) {
+    public PrimeTester(NumberUnderTest numberUnderTest, int highestNumberToTest)
+    {
         this.numberUnderTest = numberUnderTest;
         this.highestNumberToTest = highestNumberToTest;
     }
 
-    public void startTesting() throws MustDieException {
-        while (true) {
+    public void startTesting() throws MustDieException
+    {
+        while (true)
+        {
             var number = numberUnderTest.getNumber();
 
-            if (number > highestNumberToTest){
+            if (number > highestNumberToTest)
+            {
                 break;
             }
 
-            if (number == 37) {
-                throw new OuchIFoundThirtySevenAndHenceMustDieException();
+            if (number == 37)
+            {
+                throw new OuchIFoundThirtySevenAndHenceMustDieException(Thread.currentThread().getId() +
+                        " found Thirty Seven and must die.");
             }
 
 //            if (unluckyNumbers.contains(number)) {
@@ -35,17 +41,23 @@ public class PrimeTester {
 
             boolean isPrime = Primes.isPrime(number);
 
-            if (isPrime) {
+            if (isPrime)
+            {
                 System.out.println(Thread.currentThread().getId() + " found a prime number: " + number);
             }
         }
     }
 
-    public void run() {
-        try {
+    public void run()
+    {
+        try
+        {
             startTesting();
-        } catch (MustDieException e) {
-            System.out.println(Thread.currentThread().getId() +  " found Unlucky Number and must die.");
+        } catch (MustDieException e)
+        {
+            var message = !e.getMessage().isBlank() ? e.getMessage()
+                    : Thread.currentThread().getId() + " found Unlucky Number and must die.";
+            System.out.println(message);
         }
     }
 }

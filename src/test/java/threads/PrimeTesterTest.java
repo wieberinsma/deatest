@@ -3,22 +3,25 @@ package threads;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import threads.exceptions.OuchIFoundUnluckyNumberAndHenceMustDieException;
+import threads.exceptions.OuchIFoundThirtySevenAndHenceMustDieException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class PrimeTesterTest {
+public class PrimeTesterTest
+{
     private final NumberUnderTest nut = new NumberUnderTest();
     private final ByteArrayOutputStream ba = new ByteArrayOutputStream();
 
     @BeforeEach
-    void setup() {
+    void setup()
+    {
         System.setOut(new PrintStream(ba));
     }
 
     @Test
-    void PrimesTo3Returns2and3() {
+    void PrimesTo3Returns2and3()
+    {
         // Arrange
         PrimeTester pt = new PrimeTester(nut, 3);
 
@@ -32,16 +35,18 @@ public class PrimeTesterTest {
     }
 
     @Test
-    void PrimesTo37ThrowsException() {
+    void PrimesTo37ThrowsException()
+    {
         // Arrange
         PrimeTester pt = new PrimeTester(nut, 37);
 
         // Act & Assert
-        Assertions.assertThrows(OuchIFoundUnluckyNumberAndHenceMustDieException.class, pt::startTesting);
+        Assertions.assertThrows(OuchIFoundThirtySevenAndHenceMustDieException.class, pt::startTesting);
     }
 
     @Test
-    void PrimesTo37ContainsExceptionText() {
+    void PrimesTo37ContainsExceptionText()
+    {
         // Arrange
         PrimeTester pt = new PrimeTester(nut, 37);
 

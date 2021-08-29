@@ -4,10 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NumberUnderTestTest {
-
+public class NumberUnderTestTest
+{
     @Test
-    void OneCallReturnsZero() {
+    void OneCallReturnsZero()
+    {
         // Arrange
         NumberUnderTest nut = new NumberUnderTest();
 
@@ -19,7 +20,8 @@ public class NumberUnderTestTest {
     }
 
     @Test
-    void FourCallsReturnsZeroThroughThree() {
+    void FourCallsReturnsZeroThroughThree()
+    {
         // Arrange
         NumberUnderTest nut = new NumberUnderTest();
 

@@ -1,6 +1,5 @@
 package junit;
 
-import junit.StringCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,18 +60,21 @@ public class StringCalculatorTest
     }
 
     @Test
-    public void addWithValidIntTestNumberRange() {
+    public void addWithValidIntTestNumberRange()
+    {
         Assertions.assertEquals(-1, stringCalculator.add("//[X]\n1001"));
         Assertions.assertEquals(6, stringCalculator.add("//+\n1+2+3+" + 2147483647));
     }
 
     @Test
-    public void addWithValidIntTestAnyLengthDelimiter() {
+    public void addWithValidIntTestAnyLengthDelimiter()
+    {
         Assertions.assertEquals(101, stringCalculator.add("//<DELIMITER>\n44<DELIMITER>32<DELIMITER>25"));
     }
 
     @Test
-    public void addWithValidIntTestAnyMultipleDelimiters() {
+    public void addWithValidIntTestAnyMultipleDelimiters()
+    {
         Assertions.assertEquals(166, stringCalculator.add("//[0-0][|][:]\n1:2:3:4|50-06|70-08:9:100-0110-0100"));
         Assertions.assertEquals(14, stringCalculator.add("//[1][][]\n012131415"));
     }

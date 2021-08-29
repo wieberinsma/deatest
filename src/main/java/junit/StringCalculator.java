@@ -30,9 +30,9 @@ public class StringCalculator
 
             delimiterArray = getDelimiterArray(delimiters);
             numbers = str.substring(numberStartIndex).strip();
-        }
-        else {
-            delimiterArray = new String[] {"\n", ","};
+        } else
+        {
+            delimiterArray = new String[]{"\n", ","};
             numbers = str.strip();
         }
 
@@ -43,13 +43,11 @@ public class StringCalculator
         if (numbers.equals(""))
         {
             return 0;
-        }
-        else if (numberArray.length == 1)
+        } else if (numberArray.length == 1)
         {
             var number = Integer.parseInt(numbers);
             return isValidNumber(number) ? number : -1;
-        }
-        else if (numberArray.length >= 2)
+        } else if (numberArray.length >= 2)
         {
             return Arrays.stream(numberArray)
                     .map(String::strip)
@@ -57,8 +55,7 @@ public class StringCalculator
                     .mapToInt(Integer::parseInt)
                     .filter(this::isValidNumber)
                     .sum();
-        }
-        else
+        } else
         {
             return -1;
         }
@@ -85,7 +82,8 @@ public class StringCalculator
     {
         String delimiters = str.substring(2, numberStartIndex - 1).strip();
 
-        if (delimiters.isEmpty()) {
+        if (delimiters.isEmpty())
+        {
             delimiters = Character.toString(str.charAt(2));
         }
 
@@ -97,10 +95,9 @@ public class StringCalculator
         if (delimiters.contains("][") && !delimiters.equals("]["))
         {
             return delimiters.substring(1, delimiters.length() - 1).split("]\\[");
-        }
-        else
+        } else
         {
-            return new String[] {delimiters};
+            return new String[]{delimiters};
         }
     }
 

@@ -12,17 +12,19 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
-public class StreamsTest {
-
+public class StreamsTest
+{
     private Streams sut;
 
     @BeforeEach
-    void setup() {
+    void setup()
+    {
         sut = new Streams();
     }
 
     @Test
-    void test1RemoveStringsWithMoreThanThreeCharacters() {
+    void test1RemoveStringsWithMoreThanThreeCharacters()
+    {
         // Arrange
         List<String> input = asList("Welcome", "to", "Java", "12", "Streams");
 
@@ -34,7 +36,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test2RemoveNonNumeralStrings() {
+    void test2RemoveNonNumeralStrings()
+    {
         // Arrange
         List<String> input = asList("Welcome", "to", "Java", "12", "Streams");
 
@@ -46,7 +49,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test3AFindShortestString() {
+    void test3AFindShortestString()
+    {
         // Arrange
         List<String> input = asList("Welcome", "to", "Java", "12", "Streams");
 
@@ -58,7 +62,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test3BFindShortestStringOfEmptyList() {
+    void test3BFindShortestStringOfEmptyList()
+    {
         // Arrange
         List<String> input = asList(new String[]{});
 
@@ -70,7 +75,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test4CreateAFullSentenceFromTheList() {
+    void test4CreateAFullSentenceFromTheList()
+    {
         // Arrange
         List<String> input = asList("Welcome", "to", "Java", "12", "Streams");
 
@@ -82,7 +88,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test5CalculateTotalCostOfAllProducts() {
+    void test5CalculateTotalCostOfAllProducts()
+    {
         // Arrange
         var input = initialiseTestProductSet();
 
@@ -94,7 +101,8 @@ public class StreamsTest {
     }
 
     @Test
-    void test6CalculateTotalCostOfAllGadgets() {
+    void test6CalculateTotalCostOfAllGadgets()
+    {
         // Arrange
         var input = initialiseTestProductSet();
 
@@ -105,7 +113,8 @@ public class StreamsTest {
         Assertions.assertEquals(3886, totalValue);
     }
 
-    private List<Product> initialiseTestProductSet() {
+    private List<Product> initialiseTestProductSet()
+    {
         final int PRICE_TV = 1200;
         final int PRICE_LAPTOP = 2300;
         final int PRICE_TABLET = 149;

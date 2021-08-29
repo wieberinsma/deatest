@@ -11,19 +11,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListMakerTest {
-
+public class ListMakerTest
+{
     private ListMaker listMaker;
     private List<Person> persons;
 
     @BeforeEach
-    void setup() {
+    void setup()
+    {
         listMaker = new ListMaker();
         persons = new ArrayList<>();
     }
 
     @Test
-    void testAdultFemaleOnNullValue() {
+    void testAdultFemaleOnNullValue()
+    {
         // Arrange
 
         // Act
@@ -34,7 +36,8 @@ public class ListMakerTest {
     }
 
     @Test
-    void testAdultFemaleOnEmptyList() {
+    void testAdultFemaleOnEmptyList()
+    {
         // Arrange
 
         // Act
@@ -45,7 +48,8 @@ public class ListMakerTest {
     }
 
     @Test
-    void testAdultFemaleList() {
+    void testAdultFemaleList()
+    {
         // Arrange
         Person person1 = PersonBuilder.aPerson().withFirstName("A").withLastName("A").withGender(Gender.FEMALE).withBirthDate(LocalDate.now().minusYears(20)).build();
         Person person2 = PersonBuilder.aPerson().withFirstName("B").withLastName("B").withGender(Gender.MALE).withBirthDate(LocalDate.now().minusYears(30)).build();
@@ -67,7 +71,8 @@ public class ListMakerTest {
     }
 
     @Test
-    void testAdultMaleOnNullValue() {
+    void testAdultMaleOnNullValue()
+    {
         // Arrange
 
         // Act
@@ -78,7 +83,8 @@ public class ListMakerTest {
     }
 
     @Test
-    void testAdultMaleOnEmptyList() {
+    void testAdultMaleOnEmptyList()
+    {
         // Arrange
 
         // Act
@@ -89,7 +95,8 @@ public class ListMakerTest {
     }
 
     @Test
-    void testAdultMaleList() {
+    void testAdultMaleList()
+    {
         // Arrange
         Person person1 = PersonBuilder.aPerson().withFirstName("A").withLastName("A").withGender(Gender.FEMALE).withBirthDate(LocalDate.now().minusYears(23)).build();
         Person person2 = PersonBuilder.aPerson().withFirstName("B").withLastName("B").withGender(Gender.MALE).withBirthDate(LocalDate.now().minusYears(33)).build();

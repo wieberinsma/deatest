@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OrdersWriterTest {
-
+public class OrdersWriterTest
+{
     private Orders orders;
     private Order order111;
 
     @BeforeEach
-    void setup() {
+    void setup()
+    {
         orders = new Orders();
         order111 = new Order(111);
 
@@ -19,7 +20,8 @@ public class OrdersWriterTest {
     }
 
     @Test
-    void emptyOrdersReturnsCorrectJsonString() {
+    void emptyOrdersReturnsCorrectJsonString()
+    {
         // Arrange
         var ordersWriter = new OrdersWriter(new Orders());
 
@@ -31,7 +33,8 @@ public class OrdersWriterTest {
     }
 
     @Test
-    void oneOrderReturnsCorrectJsonString() {
+    void oneOrderReturnsCorrectJsonString()
+    {
         // Arrange
         var order111 = "{\"id\": 111, \"products\": []}";
         var ordersWriter = new OrdersWriter(orders);
@@ -44,7 +47,8 @@ public class OrdersWriterTest {
     }
 
     @Test
-    void twoOrdersReturnsCorrectJsonString() {
+    void twoOrdersReturnsCorrectJsonString()
+    {
         // Arrange
         orders.addOrder(new Order(222));
         var ordersWriter = new OrdersWriter(orders);
@@ -60,7 +64,8 @@ public class OrdersWriterTest {
     }
 
     @Test
-    void oneOrderWithOneProductReturnsCorrectJsonString() {
+    void oneOrderWithOneProductReturnsCorrectJsonString()
+    {
         // Arrange
         order111.addProduct(new Product("Shirt", 1, 3, 2.99, "TWD"));
 
@@ -76,7 +81,8 @@ public class OrdersWriterTest {
     }
 
     @Test
-    void oneOrderWithOneProductNoSizeReturnsCorrectJsonString() {
+    void oneOrderWithOneProductNoSizeReturnsCorrectJsonString()
+    {
         // Arrange
         order111.addProduct(new Product("Pot", 2, -1, 16.50, "SGD"));
 
@@ -166,8 +172,8 @@ public class OrdersWriterTest {
     }
 
 
-
-    private String JsonOrder111WithProduct(String productJson) {
+    private String JsonOrder111WithProduct(String productJson)
+    {
         return "{\"id\": 111, \"products\": [" + productJson + "]}";
     }
 }

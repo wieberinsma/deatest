@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ListMaker {
-
+public class ListMaker
+{
     private static final int ADULT_AGE = 18;
 
     private final Predicate<Person> isAdult = (person) -> person.isAdult(ADULT_AGE);
@@ -17,16 +17,20 @@ public class ListMaker {
     private final Predicate<Person> isMale = (person) -> person.isOfGender(Gender.MALE);
     private final Predicate<Person> isFemale = (person) -> person.isOfGender(Gender.FEMALE);
 
-    public List<Person> createMaleAdultList(List<Person> allPersons) {
+    public List<Person> createMaleAdultList(List<Person> allPersons)
+    {
         return createAdultList(allPersons, isMale);
     }
 
-    public List<Person> createFemaleAdultList(List<Person> allPersons) {
+    public List<Person> createFemaleAdultList(List<Person> allPersons)
+    {
         return createAdultList(allPersons, isFemale);
     }
 
-    private List<Person> createAdultList(List<Person> allPersons, Predicate<Person> hasGender) {
-        if (allPersons == null) {
+    private List<Person> createAdultList(List<Person> allPersons, Predicate<Person> hasGender)
+    {
+        if (allPersons == null)
+        {
             return new ArrayList<>();
         }
 

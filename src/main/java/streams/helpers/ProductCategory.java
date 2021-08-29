@@ -1,6 +1,7 @@
 package streams.helpers;
 
-public enum ProductCategory {
+public enum ProductCategory
+{
     GADGETS,
     FURNITURE
 }
