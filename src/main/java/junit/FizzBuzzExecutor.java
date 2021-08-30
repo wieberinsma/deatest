@@ -6,20 +6,20 @@ public class FizzBuzzExecutor
     {
         var sb = new StringBuilder();
 
-        var by3 = number % 3 == 0;
-        var by5 = number % 5 == 0;
+        var divideBy3 = number % 3 == 0;
+        var divideBy5 = number % 5 == 0;
 
-        if (by3)
+        if (divideBy3)
         {
             sb.append("Fizz");
         }
 
-        if (by5)
+        if (divideBy5)
         {
             sb.append("Buzz");
         }
 
-        if (!by3 && !by5)
+        if (!divideBy3 && !divideBy5)
         {
             sb.append(number);
         }

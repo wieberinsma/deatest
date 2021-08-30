@@ -38,13 +38,13 @@
     </parent>
 
     <dependencies>
-        <!-- From parent POM -->
+        <!-- Inherited dependency from parent POM -->
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
         </dependency>
 
-        <!-- System -->
+        <!-- System Dependency -->
         <dependency>
             <groupId>nl.han.ica.oose.dea</groupId>
             <artifactId>exercise-refactoring</artifactId>
