@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class StringCalculator
 {
-    private static final String DELIMITER_REGEX = "^(?s)\\/\\/(.|\n)+\n(.|\n)*$";
+    private static final String DELIMITER_REGEX = "(?s)//.+\n.*";
 
     public int add(String str)
     {

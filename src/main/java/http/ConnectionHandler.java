@@ -12,7 +12,7 @@ public class ConnectionHandler
             "Content-Length: 190\n" +
             "Content-Type: text/html\n";
 
-    private Socket socket;
+    private final Socket socket;
 
     public ConnectionHandler(Socket socket)
     {

@@ -57,6 +57,7 @@ public class StringCalculatorTest
         Assertions.assertEquals(101, stringCalculator.add("//\n\n\n \r44\n32\n25\n \r"));
         Assertions.assertEquals(101, stringCalculator.add("//0\n044032025"));
         Assertions.assertEquals(101, stringCalculator.add("//][\n44][32][25"));
+        Assertions.assertEquals(101, stringCalculator.add("// \n 44 32 25"));
     }
 
     @Test

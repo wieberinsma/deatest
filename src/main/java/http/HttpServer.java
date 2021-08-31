@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 
 public class HttpServer
 {
-    private int tcpPort;
+    private final int tcpPort;
 
     public HttpServer(int tcpPort)
     {
