@@ -16,7 +16,8 @@ public class HtmlPageReader
             var file = new File(classLoader.getResource(fullFileName).getFile()).toPath();
 
             return new String(Files.readAllBytes(file));
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException(e);
         }

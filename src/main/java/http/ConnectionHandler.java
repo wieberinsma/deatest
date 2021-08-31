@@ -31,7 +31,8 @@ public class ConnectionHandler
 
             parseRequest(inputStreamReader);
             writeResponse(outputStreamWriter);
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException(e);
         }
@@ -59,7 +60,8 @@ public class ConnectionHandler
             outputStreamWriter.write(pageReader.readFile("index.html"));
             outputStreamWriter.newLine();
             outputStreamWriter.flush();
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException(e);
         }

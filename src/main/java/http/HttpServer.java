@@ -32,7 +32,8 @@ public class HttpServer
                 var connection = new Thread(connectionHandler::handle);
                 connection.start();
             }
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             throw new RuntimeException(e);
         }

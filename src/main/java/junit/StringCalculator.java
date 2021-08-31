@@ -30,7 +30,8 @@ public class StringCalculator
 
             delimiterArray = getDelimiterArray(delimiters);
             numbers = str.substring(numberStartIndex).strip();
-        } else
+        }
+        else
         {
             delimiterArray = new String[]{"\n", ","};
             numbers = str.strip();
@@ -39,15 +40,16 @@ public class StringCalculator
         delimiterRegex = getDelimiterRegexForArray(delimiterArray);
         numberArray = numbers.split(delimiterRegex);
 
-        // Case handling
         if (numbers.equals(""))
         {
             return 0;
-        } else if (numberArray.length == 1)
+        }
+        else if (numberArray.length == 1)
         {
             var number = Integer.parseInt(numbers);
             return isValidNumber(number) ? number : -1;
-        } else if (numberArray.length >= 2)
+        }
+        else if (numberArray.length >= 2)
         {
             return Arrays.stream(numberArray)
                     .map(String::strip)
@@ -55,7 +57,8 @@ public class StringCalculator
                     .mapToInt(Integer::parseInt)
                     .filter(this::isValidNumber)
                     .sum();
-        } else
+        }
+        else
         {
             return -1;
         }
@@ -95,7 +98,8 @@ public class StringCalculator
         if (delimiters.contains("][") && !delimiters.equals("]["))
         {
             return delimiters.substring(1, delimiters.length() - 1).split("]\\[");
-        } else
+        }
+        else
         {
             return new String[]{delimiters};
         }
