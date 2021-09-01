@@ -113,6 +113,6 @@ public class StringCalculator
 
     public boolean isValidNumber(int num)
     {
-        return num <= 1000;
+        return num >= -1000 && num <= 1000;
     }
 }
