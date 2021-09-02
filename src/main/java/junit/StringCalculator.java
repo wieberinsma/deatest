@@ -13,55 +13,31 @@ public class StringCalculator
     {
         int numberStartIndex = getNumberStartIndex(str);
 
-        String[] delimiterArray;
-        String numbers;
-
-        String delimiterRegex;
-        String[] numberArray;
-
         if (numberStartIndex == -1)
         {
             return 0;
         }
 
+        String[] delimiterArray;
+        String numberString;
+
         if (str.matches(DELIMITER_REGEX))
         {
-            var delimiters = getDelimitersForRegex(str, numberStartIndex);
+            var delimiters = getDelimiters(str, numberStartIndex);
 
             delimiterArray = getDelimiterArray(delimiters);
-            numbers = str.substring(numberStartIndex).strip();
+            numberString = str.substring(numberStartIndex).strip();
         }
         else
         {
             delimiterArray = new String[] {"\n", ","};
-            numbers = str.strip();
+            numberString = str.strip();
         }
 
-        delimiterRegex = getDelimiterRegexForArray(delimiterArray);
-        numberArray = numbers.split(delimiterRegex);
+        String delimiterRegex = getDelimiterRegexForArray(delimiterArray);
+        String[] numberArray = numberString.split(delimiterRegex);
 
-        if (numbers.equals(""))
-        {
-            return 0;
-        }
-        else if (numberArray.length == 1)
-        {
-            var number = Integer.parseInt(numbers);
-            return isValidNumber(number) ? number : -1;
-        }
-        else if (numberArray.length >= 2)
-        {
-            return Arrays.stream(numberArray)
-                    .map(String::strip)
-                    .filter(number -> !number.isBlank())
-                    .mapToInt(Integer::parseInt)
-                    .filter(this::isValidNumber)
-                    .sum();
-        }
-        else
-        {
-            return -1;
-        }
+        return calculateSum(numberString, numberArray);
     }
 
     private int getNumberStartIndex(String str)
@@ -81,7 +57,7 @@ public class StringCalculator
         return numberStartIndex;
     }
 
-    private String getDelimitersForRegex(String str, int numberStartIndex)
+    private String getDelimiters(String str, int numberStartIndex)
     {
         String delimiters = str.substring(2, numberStartIndex - 1).strip();
 
@@ -109,6 +85,32 @@ public class StringCalculator
     {
         List<String> delimiterList = Arrays.stream(delimiters).map(Pattern::quote).collect(Collectors.toList());
         return "(" + String.join("|", delimiterList) + ")+";
+    }
+
+    private int calculateSum(String numberString, String[] numberArray)
+    {
+        if (numberString.equals(""))
+        {
+            return 0;
+        }
+        else if (numberArray.length == 1)
+        {
+            var number = Integer.parseInt(numberString);
+            return isValidNumber(number) ? number : -1;
+        }
+        else if (numberArray.length >= 2)
+        {
+            return Arrays.stream(numberArray)
+                    .map(String::strip)
+                    .filter(number -> !number.isBlank())
+                    .mapToInt(Integer::parseInt)
+                    .filter(this::isValidNumber)
+                    .sum();
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     public boolean isValidNumber(int num)
