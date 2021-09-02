@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 
 public class StringCalculator
 {
-    private static final String DELIMITER_REGEX = "(?s)//.+\n.*";
+    private static final String NON_NUMERIC_REGEX = "[^0-9-]";
+
+    private static final String MULTIPLE_DELIMITER_REGEX = "(?s)//.+\n.*";
 
     public int add(String str)
     {
@@ -18,24 +20,21 @@ public class StringCalculator
             return 0;
         }
 
-        String[] delimiterArray;
         String numberString;
+        String[] numberArray;
 
-        if (str.matches(DELIMITER_REGEX))
+        if (str.matches(MULTIPLE_DELIMITER_REGEX))
         {
-            var delimiters = getDelimiters(str, numberStartIndex);
-
-            delimiterArray = getDelimiterArray(delimiters);
             numberString = str.substring(numberStartIndex).strip();
+
+            String delimiterRegex = getDelimiterRegex(str, numberStartIndex);
+            numberArray = numberString.split(delimiterRegex);
         }
         else
         {
-            delimiterArray = new String[] {"\n", ","};
             numberString = str.strip();
+            numberArray = str.split(NON_NUMERIC_REGEX);
         }
-
-        String delimiterRegex = getDelimiterRegexForArray(delimiterArray);
-        String[] numberArray = numberString.split(delimiterRegex);
 
         return calculateSum(numberString, numberArray);
     }
@@ -55,6 +54,15 @@ public class StringCalculator
         }
 
         return numberStartIndex;
+    }
+
+    private String getDelimiterRegex(String str, int numberStartIndex)
+    {
+        var delimiters = getDelimiters(str, numberStartIndex);
+        String[] delimiterArray = getDelimiterArray(delimiters);
+
+        List<String> delimiterList = Arrays.stream(delimiterArray).map(Pattern::quote).collect(Collectors.toList());
+        return "(" + String.join("|", delimiterList) + ")+";
     }
 
     private String getDelimiters(String str, int numberStartIndex)
@@ -79,12 +87,6 @@ public class StringCalculator
         {
             return new String[] {delimiters};
         }
-    }
-
-    private String getDelimiterRegexForArray(String[] delimiters)
-    {
-        List<String> delimiterList = Arrays.stream(delimiters).map(Pattern::quote).collect(Collectors.toList());
-        return "(" + String.join("|", delimiterList) + ")+";
     }
 
     private int calculateSum(String numberString, String[] numberArray)

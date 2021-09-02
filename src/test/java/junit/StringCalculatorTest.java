@@ -47,11 +47,13 @@ public class StringCalculatorTest
     public void addWithValidIntTestReturnDelimiter()
     {
         Assertions.assertEquals(101, stringCalculator.add("44,32\n25"));
+        Assertions.assertEquals(306, stringCalculator.add("44,32\n25:205"));
     }
 
     @Test
     public void addWithValidIntTestAnyDelimiter()
     {
+        Assertions.assertEquals(111, stringCalculator.add("44&32_25.10"));
         Assertions.assertEquals(101, stringCalculator.add("//&\n44&32&25"));
         Assertions.assertEquals(101, stringCalculator.add("//\n\n44\n32\n25"));
         Assertions.assertEquals(101, stringCalculator.add("//\n\n\n \r44\n32\n25\n \r"));
