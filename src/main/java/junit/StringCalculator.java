@@ -33,7 +33,7 @@ public class StringCalculator
         }
         else
         {
-            delimiterArray = new String[]{"\n", ","};
+            delimiterArray = new String[] {"\n", ","};
             numbers = str.strip();
         }
 
@@ -67,11 +67,11 @@ public class StringCalculator
     private int getNumberStartIndex(String str)
     {
         int numberStartIndex = -1;
-        int returnIndex = str.indexOf("\n");
+        int delimiterEndIndex = str.indexOf("\n");
 
-        for (int i = 0; i < str.length(); i++)
+        for (int i = (delimiterEndIndex + 1); i < str.length(); i++)
         {
-            if (Character.isDigit(str.charAt(i)) && i > returnIndex)
+            if (Character.isDigit(str.charAt(i)))
             {
                 numberStartIndex = i;
                 break;
@@ -101,7 +101,7 @@ public class StringCalculator
         }
         else
         {
-            return new String[]{delimiters};
+            return new String[] {delimiters};
         }
     }
 
