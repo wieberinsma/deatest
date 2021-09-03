@@ -109,8 +109,8 @@ public class StringCalculator
         }
     }
 
-    public boolean isValidNumber(int num)
+    public boolean isValidNumber(int number)
     {
-        return num >= -1000 && num <= 1000;
+        return number >= -1000 && number <= 1000;
     }
 }
