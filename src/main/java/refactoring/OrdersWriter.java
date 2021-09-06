@@ -42,6 +42,9 @@ public class OrdersWriter
         return String.join(", ", productsAsJson);
     }
 
+    /**
+     * Dezelfde methodes als hierboven, maar dan mbv de Stream API
+     **/
 //    private String getOrdersAsJson()
 //    {
 //        return ordersWrapper.getOrders().stream().map(order -> order.asJson(getProductsAsJson(order.getProducts())))
