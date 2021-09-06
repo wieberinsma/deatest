@@ -20,23 +20,9 @@ public class StringCalculator
             return 0;
         }
 
-        String numberString;
-        String[] numberArray;
+        final String[] numberArray = getNumberArray(str, numberStartIndex);
 
-        if (str.matches(MULTIPLE_DELIMITER_REGEX))
-        {
-            numberString = str.substring(numberStartIndex).strip();
-
-            String delimiterRegex = getDelimiterRegex(str, numberStartIndex);
-            numberArray = numberString.split(delimiterRegex);
-        }
-        else
-        {
-            numberString = str.strip();
-            numberArray = str.split(NON_NUMERIC_REGEX);
-        }
-
-        return calculateSum(numberString, numberArray);
+        return calculateSum(numberArray);
     }
 
     private int getNumberStartIndex(String str)
@@ -89,15 +75,30 @@ public class StringCalculator
         }
     }
 
-    private int calculateSum(String numberString, String[] numberArray)
+    private String[] getNumberArray(String str, int numberStartIndex)
     {
-        if (numberString.equals(""))
+        final String[] numberArray;
+
+        if (str.matches(MULTIPLE_DELIMITER_REGEX))
         {
-            return 0;
+            String numberString = str.substring(numberStartIndex).strip();
+
+            String delimiterRegex = getDelimiterRegex(str, numberStartIndex);
+            numberArray = numberString.split(delimiterRegex);
         }
-        else if (numberArray.length == 1)
+        else
         {
-            var number = Integer.parseInt(numberString);
+            numberArray = str.strip().split(NON_NUMERIC_REGEX);
+        }
+
+        return numberArray;
+    }
+
+    private int calculateSum(String[] numberArray)
+    {
+        if (numberArray.length == 1)
+        {
+            var number = Integer.parseInt(numberArray[0]);
             return isValidNumber(number) ? number : -1;
         }
         else if (numberArray.length >= 2)

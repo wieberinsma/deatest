@@ -53,6 +53,7 @@ public class StringCalculatorTest
     @Test
     public void addWithValidIntTestAnyDelimiter()
     {
+        Assertions.assertEquals(0, stringCalculator.add("//[X]\n"));
         Assertions.assertEquals(111, stringCalculator.add("44&32_25.10"));
         Assertions.assertEquals(101, stringCalculator.add("//&\n44&32&25"));
         Assertions.assertEquals(101, stringCalculator.add("//\n\n44\n32\n25"));
