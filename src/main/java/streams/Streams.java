@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class Streams
 {
-
     public List<String> filterStringsShorterThanThreeCharacters(List<String> input)
     {
         return input.stream()
@@ -33,7 +32,7 @@ public class Streams
 
     public String createAFullSentenceFromTheList(List<String> input)
     {
-        return String.join(" ", input);
+        return input.stream().collect(Collectors.joining(","));
     }
 
     int calculateTotalCostOfAllProducts(List<Product> products)
