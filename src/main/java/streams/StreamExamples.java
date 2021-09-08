@@ -2,7 +2,9 @@ package streams;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,8 +20,10 @@ public class StreamExamples
 
     public static void main(String[] args)
     {
-        StreamExamples examples = new StreamExamples();
-        examples.example();
+//        StreamExamples examples = new StreamExamples();
+//        examples.example();
+
+        f_par();
     }
 
     public void example()
@@ -48,21 +52,16 @@ public class StreamExamples
         hobbitList.forEach(hobbit -> hobbitList.remove(hobbit));
     }
 
-    static List<String> f1()
+    static void f1()
     {
-        List<String> myList =
-                Arrays.asList("a1", "a2", "b1", "c2", "c1");
+        List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
 
-        return myList
-                .stream() // creates stream
+        myList.stream() // creates stream
                 .filter(s -> s.startsWith("c")) //  leaves a stream with only c2 and c1
                 .map(String::toUpperCase) // leaves a stream with only C2 and C1
-                .sorted() // sorts so, C1 anmd C2 change order
-                //.forEach(System.out::println);
-                .collect(Collectors.toList()); // create a list from the values on the heap
-
+                .sorted() // sorts so, C1 and C2 change order
+                .forEach(System.out::println);
     }
-
 
     static void f2()
     {
@@ -184,12 +183,8 @@ public class StreamExamples
     static void f15()
     {
         System.out.println(persons.stream()
-                .map(
-                        p ->
-                        {
-                            return Period.between(p.getBirthDate(), LocalDate.now()).getYears();
-                        })
-                .filter((a) -> a > 20)
+                .map(p -> Period.between(p.getBirthDate(), LocalDate.now()).getYears())
+                .filter(a -> a > 20)
                 .reduce(0, (a, b) -> a + b));
     }
 
