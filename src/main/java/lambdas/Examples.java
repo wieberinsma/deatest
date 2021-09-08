@@ -1,6 +1,5 @@
 package lambdas;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +9,7 @@ public class Examples
 {
     private final String[] hobbits = {"Frodo", "Samwise", "Merry", "Pippin"};
 
-    private final Stream<String> hobbitStream =  new ArrayList<>(Arrays.asList(hobbits)).stream();
+    private final Stream<String> hobbitStream =  Arrays.stream(hobbits);
 
     public static void main(String[] args)
     {

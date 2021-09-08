@@ -7,7 +7,7 @@ public class Examples
 {
     private final String[] hobbits = {"Frodo", "Samwise", "Merry", "Pippin"};
 
-    private final List<String> hobbitList =  new ArrayList<>(Arrays.asList(hobbits));
+    private final List<String> hobbitList =  Arrays.asList(hobbits);
 
     public static void main(String[] args)
     {
@@ -25,8 +25,8 @@ public class Examples
         Stream<String> hobbitStream2 = Arrays.stream(hobbits);
 
         // Aanroepen van .stream() kan op alle Collection objecten
-        Stream<String> frodoStream = hobbitList.stream();
-        Stream<String> frodoStream2 = new HashSet<>(hobbitList).stream();
+        Stream<String> hobbitStream3 = hobbitList.stream();
+        Stream<String> hobbitStream4 = new HashSet<>(hobbitList).stream();
 
         // Er zijn twee methodes genaamd .forEach() die verschillend kunnen werken
         hobbitList.stream().forEach(hobbit -> System.out.println(hobbit));
