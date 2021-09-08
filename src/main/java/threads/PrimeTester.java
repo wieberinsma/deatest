@@ -36,7 +36,8 @@ public class PrimeTester
             }
 
 //            if (unluckyNumbers.contains(number)) {
-//                throw new OuchIFoundUnluckyNumberAndHenceMustDieException();
+//                throw new OuchIFoundUnluckyNumberAndHenceMustDieException(Thread.currentThread().getId() +
+//                        " found Unlucky Number and must die.");
 //            }
 
             boolean isPrime = Primes.isPrime(number);
@@ -52,12 +53,12 @@ public class PrimeTester
     {
         try
         {
+            System.out.println("EXECUTING RUNNABLE");
+//            Thread.sleep(5000);
             startTesting();
         } catch (MustDieException e)
         {
-            var message = !e.getMessage().isBlank() ? e.getMessage()
-                    : Thread.currentThread().getId() + " found Unlucky Number and must die.";
-            System.out.println(message);
+            System.out.println(e.getMessage());
         }
     }
 }
