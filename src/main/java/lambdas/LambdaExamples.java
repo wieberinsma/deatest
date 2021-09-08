@@ -3,13 +3,13 @@ package lambdas;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class Examples
+public class LambdaExamples
 {
     private final Stream<String> hobbitStream = Arrays.stream(new String[] {"Frodo", "Samwise", "Merry", "Pippin"});
 
     public static void main(String[] args)
     {
-        Examples examples = new Examples();
+        LambdaExamples examples = new LambdaExamples();
         examples.example();
     }
 

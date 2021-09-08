@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Examples
+public class StreamExamples
 {
     private final String[] hobbits = {"Frodo", "Samwise", "Merry", "Pippin"};
 
@@ -12,7 +12,7 @@ public class Examples
 
     public static void main(String[] args)
     {
-        Examples examples = new Examples();
+        StreamExamples examples = new StreamExamples();
         examples.example();
     }
 
