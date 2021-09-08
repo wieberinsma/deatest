@@ -34,7 +34,6 @@ public class PrimeTestingApp
             System.out.println("THREAD STARTED");
 
 //            thread.interrupt();
-//            System.out.println("THREAD INTERRUPTED");
         }
 
 //        getScheduler().scheduleWithFixedDelay(() -> System.out.println("SCHEDULED TASK EXECUTING"), 3000);

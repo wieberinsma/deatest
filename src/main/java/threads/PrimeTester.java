@@ -51,12 +51,22 @@ public class PrimeTester
 
     public void run()
     {
+        boolean interrupted = Thread.currentThread().isInterrupted();
+
         try
         {
-            System.out.println("EXECUTING RUNNABLE");
-//            Thread.sleep(5000);
-            startTesting();
-        } catch (MustDieException e)
+//            Thread.sleep(1000);
+
+            if (interrupted)
+            {
+                System.out.println("THREAD IS INTERRUPTED");
+            }
+            else
+            {
+                startTesting();
+            }
+        }
+        catch (MustDieException e)
         {
             System.out.println(e.getMessage());
         }
