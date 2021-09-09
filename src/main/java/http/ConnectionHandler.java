@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ConnectionHandler
 {
-    private static final String HTTP_HEADER = "HTTP/1.1 200 OK\n" +
+    private static final String HTTP_HEADERS = "HTTP/1.1 200 OK\n" +
             "Date: Mon, 27 Aug 2018 14:08:55 +0200\n" +
             "HttpServer: Simple DEA Webserver\n" +
             "Content-Length: 190\n" +
@@ -53,11 +53,12 @@ public class ConnectionHandler
     {
         try
         {
-            var pageReader = new HtmlPageReader();
-
-            outputStreamWriter.write(HTTP_HEADER);
+            outputStreamWriter.write(HTTP_HEADERS);
             outputStreamWriter.newLine();
+
+            var pageReader = new HtmlPageReader();
             outputStreamWriter.write(pageReader.readFile("index.html"));
+
             outputStreamWriter.newLine();
             outputStreamWriter.flush();
         }

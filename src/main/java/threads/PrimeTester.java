@@ -2,11 +2,11 @@ package threads;
 
 import org.apache.commons.math3.primes.Primes;
 import threads.exceptions.MustDieException;
-import threads.exceptions.OuchIFoundUnluckyNumberAndHenceMustDieException;
+import threads.exceptions.OuchIFoundThirtySevenAndHenceMustDieException;
 
 import java.util.List;
 
-public class PrimeTester
+public class PrimeTester implements Runnable
 {
     private final NumberUnderTest numberUnderTest;
     private final int highestNumberToTest;
@@ -18,6 +18,7 @@ public class PrimeTester
         this.highestNumberToTest = highestNumberToTest;
     }
 
+    @Override
     public void run()
     {
 //        var currentThread = Thread.currentThread();
@@ -44,7 +45,7 @@ public class PrimeTester
         }
     }
 
-    public String startTesting() throws MustDieException
+    public void startTesting() throws MustDieException
     {
         while (true)
         {
@@ -55,16 +56,16 @@ public class PrimeTester
                 break;
             }
 
-//            if (number == 37)
-//            {
-//                throw new OuchIFoundThirtySevenAndHenceMustDieException(Thread.currentThread().getId() +
-//                        " found Thirty Seven and must die.");
-//            }
-
-            if (unluckyNumbers.contains(number)) {
-                throw new OuchIFoundUnluckyNumberAndHenceMustDieException(Thread.currentThread().getId() +
-                        " found Unlucky Number and must die.");
+            if (number == 37)
+            {
+                throw new OuchIFoundThirtySevenAndHenceMustDieException(Thread.currentThread().getId() +
+                        " found Thirty Seven and must die.");
             }
+
+//            if (unluckyNumbers.contains(number)) {
+//                throw new OuchIFoundUnluckyNumberAndHenceMustDieException(Thread.currentThread().getId() +
+//                        " found Unlucky Number and must die.");
+//            }
 
             boolean isPrime = Primes.isPrime(number);
 
@@ -73,7 +74,5 @@ public class PrimeTester
                 System.out.println(Thread.currentThread().getId() + " found a prime number: " + number);
             }
         }
-
-        return "";
     }
 }
