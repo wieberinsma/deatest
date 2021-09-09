@@ -32,12 +32,15 @@ class Counter implements Runnable
     {
         String threadName =  Thread.currentThread().getName();
 
-        //incrementing
-        this.increment();
-        System.out.println("Value for " + threadName + ": " + this.getValue());
+        synchronized (this)
+        {
+            //incrementing
+            this.increment();
+            System.out.println("Value for " + threadName + ": " + this.getValue());
 
-        //decrementing
-        this.decrement();
-        System.out.println("Value for " + threadName + ": " + this.getValue());
+            //decrementing
+            this.decrement();
+            System.out.println("Value for " + threadName + ": " + this.getValue());
+        }
     }
 }
