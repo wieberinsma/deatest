@@ -18,7 +18,33 @@ public class PrimeTester
         this.highestNumberToTest = highestNumberToTest;
     }
 
-    public void startTesting() throws MustDieException
+    public void run()
+    {
+//        var currentThread = Thread.currentThread();
+//
+//        System.out.println(currentThread.getId());
+        boolean interrupted = Thread.currentThread().isInterrupted();
+
+        try
+        {
+//            Thread.sleep(1000);
+
+            if (interrupted)
+            {
+                System.out.println("THREAD IS INTERRUPTED");
+            }
+            else
+            {
+                startTesting();
+            }
+        }
+        catch (MustDieException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String startTesting() throws MustDieException
     {
         while (true)
         {
@@ -47,28 +73,7 @@ public class PrimeTester
                 System.out.println(Thread.currentThread().getId() + " found a prime number: " + number);
             }
         }
-    }
 
-    public void run()
-    {
-        boolean interrupted = Thread.currentThread().isInterrupted();
-
-        try
-        {
-//            Thread.sleep(1000);
-
-            if (interrupted)
-            {
-                System.out.println("THREAD IS INTERRUPTED");
-            }
-            else
-            {
-                startTesting();
-            }
-        }
-        catch (MustDieException e)
-        {
-            System.out.println(e.getMessage());
-        }
+        return "";
     }
 }

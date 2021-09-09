@@ -20,7 +20,7 @@ public class PrimeTestingApp
         app.startTesting();
     }
 
-    private void startTesting() throws InterruptedException
+    private void startTesting()
     {
         var numberUnderTest = new NumberUnderTest();
 
@@ -33,10 +33,20 @@ public class PrimeTestingApp
 //            thread.run(); // NIET GEBRUIKEN!
             System.out.println("THREAD STARTED");
 
+            // Als je een thread interrupt, kan deze een InterruptedException gooien, maar dit hoeft niet
 //            thread.interrupt();
-        }
 
-//        getScheduler().scheduleWithFixedDelay(() -> System.out.println("SCHEDULED TASK EXECUTING"), 3000);
+//            getScheduler().scheduleWithFixedDelay(() -> System.out.println("SCHEDULED TASK EXECUTING"), 3000);
+//            getScheduler().scheduleWithFixedDelay(new ExampleTask(), 3000);
+        }
+    }
+
+    public class ExampleTask implements Runnable {
+        @Override
+        public void run()
+        {
+            System.out.println("SCHEDULED TASK EXECUTING");
+        }
     }
 
     private TaskScheduler getScheduler()

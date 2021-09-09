@@ -4,7 +4,7 @@ public class NumberUnderTest
 {
     private int number;
 
-    public synchronized int getNumber()
+    public int getNumber()
     {
         return number++;
     }
