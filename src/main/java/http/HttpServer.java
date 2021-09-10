@@ -2,10 +2,16 @@ package http;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.List;
 
 public class HttpServer
 {
     private final int tcpPort;
+
+    private static final List<String> HTTP_METHODS = List.of("GET", "HEAD", "PUT", "POST", "DELETE", "CONNECT",
+            "OPTIONS", "TRACE", "PATCH");
+
+    private static final List<String> SUPPORTED_HTTP_METHODS = HTTP_METHODS.subList(0, 2);
 
     public HttpServer(int tcpPort)
     {
@@ -37,5 +43,15 @@ public class HttpServer
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<String> getHttpMethods()
+    {
+        return HTTP_METHODS;
+    }
+
+    public static List<String> getSupportedHttpMethods()
+    {
+        return SUPPORTED_HTTP_METHODS;
     }
 }

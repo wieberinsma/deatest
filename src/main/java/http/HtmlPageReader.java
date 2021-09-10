@@ -10,25 +10,18 @@ public class HtmlPageReader
 {
     private static final String HTML_ROOT = "pages/";
 
-    public String readFile(String filename)
+    public String readFile(String filename) throws IOException
     {
-        try
-        {
-            ClassLoader classLoader = getClass().getClassLoader();
-            URL localURL = classLoader.getResource(HTML_ROOT + filename);
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL localURL = classLoader.getResource(HTML_ROOT + filename);
 
-            if (localURL != null)
-            {
-                var systemPath = new File(localURL.getFile()).toPath();
-                return new String(Files.readAllBytes(systemPath));
-            }
-            else {
-                throw new FileNotFoundException("Could not find file.");
-            }
-        }
-        catch (IOException e)
+        if (localURL != null)
         {
-            throw new RuntimeException(e);
+            var systemPath = new File(localURL.getFile()).toPath();
+            return new String(Files.readAllBytes(systemPath));
+        }
+        else {
+            throw new FileNotFoundException("Could not find file.");
         }
     }
 }
