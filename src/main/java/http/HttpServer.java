@@ -33,8 +33,8 @@ public class HttpServer
 
             while (!serverSocket.isClosed())
             {
-                var acceptedSocket = serverSocket.accept();
-                var connectionHandler = new ConnectionHandler(acceptedSocket);
+                var clientSocket = serverSocket.accept();
+                var connectionHandler = new ConnectionHandler(clientSocket);
                 var connection = new Thread(connectionHandler::handle);
                 connection.start();
             }

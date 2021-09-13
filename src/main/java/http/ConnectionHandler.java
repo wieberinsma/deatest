@@ -12,12 +12,12 @@ public class ConnectionHandler
 
     private final BufferedWriter outputWriter;
 
-    public ConnectionHandler(Socket socket)
+    public ConnectionHandler(Socket clientSocket)
     {
         try
         {
-            final var socketReader = new InputStreamReader(socket.getInputStream(), StandardCharsets.US_ASCII);
-            final var socketWriter = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.US_ASCII);
+            final var socketReader = new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.US_ASCII);
+            final var socketWriter = new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.US_ASCII);
 
             inputReader = new BufferedReader(socketReader);
             outputWriter = new BufferedWriter(socketWriter);
