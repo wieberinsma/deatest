@@ -1,6 +1,6 @@
-package http;
+package httpserver;
 
-import http.exceptions.InvalidRequestException;
+import httpserver.exceptions.InvalidRequestException;
 
 import java.io.*;
 import java.net.Socket;

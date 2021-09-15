@@ -1,4 +1,4 @@
-package http.exceptions;
+package httpserver.exceptions;
 
 public class InvalidRequestException extends Throwable
 {
