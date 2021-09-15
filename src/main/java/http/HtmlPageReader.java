@@ -8,7 +8,7 @@ import java.nio.file.Files;
 
 public class HtmlPageReader
 {
-    private static final String HTML_ROOT = "pages/";
+    private static final String HTML_ROOT = "pages";
 
     public String readFile(String filename) throws IOException
     {
@@ -20,7 +20,8 @@ public class HtmlPageReader
             var systemPath = new File(localURL.getFile()).toPath();
             return new String(Files.readAllBytes(systemPath));
         }
-        else {
+        else
+        {
             throw new FileNotFoundException("Could not find file.");
         }
     }
