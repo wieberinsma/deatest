@@ -15,7 +15,7 @@ public class HttpInvokerApplication
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("https://github.com"))
+                .uri(URI.create("https://www.nu.nl"))
                 .build();
 
         invoker.invoke(request, HttpResponse.class).thenAccept(response -> System.out.println(response.body()));
