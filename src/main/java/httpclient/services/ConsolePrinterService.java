@@ -16,7 +16,6 @@ public class ConsolePrinterService
 
     public void printLogo()
     {
-
         var file = new File(getClass().getClassLoader().getResource(HTTP_LOGO).getFile());
 
         InputStreamReader reader;

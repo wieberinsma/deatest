@@ -51,14 +51,12 @@ public class DeaConsoleBrowser
                         consolePrinterService.printSelectionScreen();
                         break;
                     case "3":
-                        jsonPlaceholderService.getTodos();
+                        jsonPlaceholderService.getTodos().thenAccept(response -> System.out.println(response.body()));
                         consolePrinterService.printSelectionScreen();
                         break;
                     case "4":
-                        jsonPlaceholderService.getTodosWithCallback(response ->
-                        {
-                            consolePrinterService.printResponse(response);
-                        });
+                        jsonPlaceholderService.getTodosWithCallback(
+                                response -> consolePrinterService.printResponse(response));
                         consolePrinterService.printSelectionScreen();
                         break;
                     case "5":

@@ -12,7 +12,7 @@ public class GitHubService
 
     public String getIndexHtml()
     {
-        HttpRequest getRequest = HttpRequest.newBuilder()
+        var getRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://github.com"))
                 .build();
@@ -29,7 +29,7 @@ public class GitHubService
 
     public String getReadme()
     {
-        HttpRequest getRequest = HttpRequest.newBuilder()
+        var getRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://raw.githubusercontent.com/HANICA-DEA/exercise-http-client/master/README.md"))
                 .build();
