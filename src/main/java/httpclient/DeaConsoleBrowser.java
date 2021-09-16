@@ -73,8 +73,14 @@ public class DeaConsoleBrowser
                             consolePrinterService.printSelectionScreen();
                         });
                         break;
+                    case "7":
+                        jsonPlaceholderService.runCompletableFuture(response ->
+                        {
+                            consolePrinterService.printResponse("Your total price is: " + response);
+                            consolePrinterService.printSelectionScreen();
+                        });
+                        break;
                 }
-
             }
         }
 

@@ -53,6 +53,7 @@ public class ConsolePrinterService
         printOutputLine("* Press 5 for a asynchronous GET to https://jsonplaceholder.typicode.com/todos with a " +
                 "callback v2");
         printOutputLine("* Press 6 for creating a new Todo item at https://jsonplaceholder.typicode.com/todos");
+        printOutputLine("* Press 7 for running a custom CompletableFuture");
 
         printOutputLine("* Press q to exit");
         printInputLine();

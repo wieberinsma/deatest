@@ -14,16 +14,11 @@ import java.util.function.Consumer;
 
 public class JsonPlaceholderService
 {
-    private final HttpClient jsonPlaceholderClient = HttpClient.newHttpClient();
-
     private static final String JSON_PLACEHOLDER_URI = "https://jsonplaceholder.typicode.com/todos";
 
-    private final TodoMapper todoMapper;
+    private final HttpClient jsonPlaceholderClient = HttpClient.newHttpClient();
 
-    public JsonPlaceholderService()
-    {
-        todoMapper = new TodoMapper();
-    }
+    private final TodoMapper todoMapper = new TodoMapper();
 
     public CompletableFuture<HttpResponse<String>> getTodos()
     {
@@ -77,5 +72,34 @@ public class JsonPlaceholderService
         todo.setTitle("Finished the DEA Exercise!");
         todo.setUserId(2);
         return todo;
+    }
+
+    public void runCompletableFuture(Consumer<Integer> callback)
+    {
+        var price = 15;
+        var weightInGrams = 900;
+
+        calculateShippingPrice(weightInGrams).thenAccept(shippingPrice -> callback.accept(price + shippingPrice));
+
+        System.out.println("Please stand by. We are calculating your total price.");
+    }
+
+    public static CompletableFuture<Integer> calculateShippingPrice(int weightInGrams)
+    {
+        return CompletableFuture.supplyAsync(() ->
+        {
+            int shippingCosts = weightInGrams / 200;
+
+            try
+            {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                //ignored
+            }
+
+            return shippingCosts;
+        });
     }
 }
