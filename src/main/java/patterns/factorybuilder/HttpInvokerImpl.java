@@ -19,7 +19,7 @@ public class HttpInvokerImpl implements HttpInvoker
     public <RQ extends HttpRequest, RS extends HttpResponse<?>> CompletableFuture<RS> invoke(RQ request,
             Class<RS> responseClass)
     {
-        // Only method arg check here. Checking actual responseClass not possible when preserving async nature of call
+        // Only method arg check here. Checking actual responseClass not possible while preserving async nature of call
         return (CompletableFuture<RS>) client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
     }
 }
