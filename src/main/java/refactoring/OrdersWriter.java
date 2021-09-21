@@ -17,31 +17,6 @@ public class OrdersWriter
         return ordersWrapper.asJson(getOrdersAsJson());
     }
 
-//    private String getOrdersAsJson()
-//    {
-//        List<String> ordersAsJson = new ArrayList<>();
-//
-//        for (Order order : ordersWrapper.getOrders())
-//        {
-//            String productsAsJson = getProductsAsJson(order.getProducts());
-//            ordersAsJson.add(order.asJson(productsAsJson));
-//        }
-//
-//        return String.join(", ", ordersAsJson);
-//    }
-//
-//    private String getProductsAsJson(List<Product> products)
-//    {
-//        List<String> productsAsJson = new ArrayList<>();
-//
-//        for (Product product : products)
-//        {
-//            productsAsJson.add(product.asJson());
-//        }
-//
-//        return String.join(", ", productsAsJson);
-//    }
-
     /**
      * Dezelfde methodes als hierboven, maar dan mbv de Stream API
      **/

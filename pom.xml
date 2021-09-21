@@ -50,6 +50,11 @@
             <artifactId>commons-math3</artifactId>
             <version>${commons.math3.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.23</version>
+        </dependency>
 
         <!-- Test Dependencies -->
         <dependency>
@@ -64,12 +69,12 @@
             <version>1.7.2</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.junit.vintage</groupId>-->
-<!--            <artifactId>junit-vintage-engine</artifactId>-->
-<!--            <version>5.7.2</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.7.2</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
