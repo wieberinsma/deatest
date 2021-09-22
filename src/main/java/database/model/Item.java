@@ -1,4 +1,4 @@
-package database;
+package database.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,8 +14,7 @@ public class Item
     @Column
     private String name;
 
-    @Column
-    @ElementCollection
+    @Transient
     private List<String> categories;
 
     @Column
@@ -78,10 +77,9 @@ public class Item
     {
         return "Item\n" +
                 "{\n" +
-                    "id=" + id + "\n" +
-                    ", name='" + name + '\'' + "\n" +
-                    ", categories=" + categories.toString() + "\n" +
-                    ", title='" + title + '\'' + "\n" +
-                '}';
+                    "\tid=" + id + ",\n" +
+                    "\tname='" + name + '\'' + ",\n" +
+                    "\ttitle='" + title + '\'' + "\n" +
+                "}\n";
     }
 }
