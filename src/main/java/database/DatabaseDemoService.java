@@ -14,4 +14,9 @@ public class DatabaseDemoService
 
     @Inject
     private ItemsRepository itemsRepository;
+
+    public EntityManagerFactory getEntityManagerFactory()
+    {
+        return entityManagerFactory;
+    }
 }
