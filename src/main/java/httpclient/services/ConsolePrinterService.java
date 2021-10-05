@@ -30,7 +30,6 @@ public class ConsolePrinterService
             {
                 System.out.println(s);
             }
-
         }
         catch (IOException e)
         {
