@@ -91,11 +91,13 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- App dependencies -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.9</version>
-        </dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>5.3.9</version>
+    </dependency>
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>

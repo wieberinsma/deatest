@@ -1,4 +1,4 @@
-package database;
+package database.service;
 
 import database.repository.ItemsRepository;
 import org.springframework.stereotype.Service;
