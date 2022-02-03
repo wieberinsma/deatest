@@ -6,6 +6,10 @@ public class ExceptionMachineRunner
     {
         var exceptionMachine = new ExceptionMachine();
 
+//        exceptionMachine.rethrowException();
+
         System.out.println(exceptionMachine.finallyWithReturn());
+//
+//        exceptionMachine.tryWithResources();
     }
 }
