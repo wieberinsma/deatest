@@ -6,14 +6,6 @@ class Counter implements Runnable
 
     public void increment()
     {
-        try
-        {
-            Thread.sleep(10);
-        }
-        catch (InterruptedException ignored)
-        {
-        }
-
         c++;
     }
 
@@ -32,15 +24,12 @@ class Counter implements Runnable
     {
         String threadName =  Thread.currentThread().getName();
 
-        synchronized (this)
-        {
-            //incrementing
-            this.increment();
-            System.out.println("Value for " + threadName + ": " + this.getValue());
+        //incrementing
+        this.increment();
+        System.out.println("Value for " + threadName + ": " + this.getValue());
 
-            //decrementing
-            this.decrement();
-            System.out.println("Value for " + threadName + ": " + this.getValue());
-        }
+        //decrementing
+        this.decrement();
+        System.out.println("Value for " + threadName + ": " + this.getValue());
     }
 }

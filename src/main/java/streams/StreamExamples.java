@@ -23,7 +23,8 @@ public class StreamExamples
 //        StreamExamples examples = new StreamExamples();
 //        examples.example();
 
-        f_par();
+        f10();
+//        f_par();
     }
 
     public void example()
