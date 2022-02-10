@@ -34,7 +34,7 @@ public class PrimeTestingApp
             System.out.println("THREAD STARTED");
 
             // Als je een thread interrupt, kan deze een InterruptedException gooien, maar dit hoeft niet
-            thread.interrupt();
+//            thread.interrupt();
         }
 
 //        getScheduler().scheduleWithFixedDelay(() -> System.out.println("LAMBDA RUNNABLE"), 3000);
