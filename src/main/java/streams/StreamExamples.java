@@ -20,9 +20,13 @@ public class StreamExamples
 
     public static void main(String[] args)
     {
-//        StreamExamples examples = new StreamExamples();
-//        examples.example();
+        StreamExamples examples = new StreamExamples();
+        examples.example();
 
+//        f1();
+//        f3();
+//        f10();
+//        f11();
         f_par();
     }
 
@@ -44,12 +48,12 @@ public class StreamExamples
         Stream<String> hobbitStream4 = new HashSet<>(hobbitList).stream();
 
         // Er zijn twee methodes genaamd .forEach() die verschillend kunnen werken, hieronder niet
-        hobbitList.stream().forEach(hobbit -> System.out.println(hobbit));
-        hobbitList.forEach(hobbit -> System.out.println(hobbit));
+//        hobbitList.stream().forEach(hobbit -> System.out.println(hobbit));
+//        hobbitList.forEach(hobbit -> System.out.println(hobbit));
 
         // Maar zie dat hier de 2 stacktraces verschillen, en dus verschillend gedrag _kunnen_ vertonen
-        hobbitList.stream().forEach(hobbit -> hobbitList.remove(hobbit));
-        hobbitList.forEach(hobbit -> hobbitList.remove(hobbit));
+//        hobbitList.stream().forEach(hobbit -> hobbitList.remove(hobbit));
+//        hobbitList.forEach(hobbit -> hobbitList.remove(hobbit));
     }
 
     static void f1()
@@ -57,10 +61,10 @@ public class StreamExamples
         List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
 
         myList.stream() // creates stream
-                .filter(s -> s.startsWith("c")) //  leaves a stream with only c2 and c1
+                .filter(element -> element.startsWith("c")) //  leaves a stream with only c2 and c1
                 .map(String::toUpperCase) // leaves a stream with only C2 and C1
                 .sorted() // sorts so, C1 and C2 change order
-                .forEach(System.out::println);
+                .forEach(System.out::println); // terminate the Stream
     }
 
     static void f2()
@@ -134,7 +138,7 @@ public class StreamExamples
                 {
                     return s.toUpperCase();
                 })
-//                .sorted()
+                .sorted()
                 .anyMatch(s ->
                 {
                     return s.startsWith("A");

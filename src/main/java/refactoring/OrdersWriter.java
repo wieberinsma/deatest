@@ -42,7 +42,6 @@ public class OrdersWriter
         return String.join(", ", productsAsJson);
     }
 
-
     /**
      * Dezelfde methodes als hierboven, maar dan mbv de Stream API
      **/
