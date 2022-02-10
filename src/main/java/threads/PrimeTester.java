@@ -2,7 +2,7 @@ package threads;
 
 import org.apache.commons.math3.primes.Primes;
 import threads.exceptions.MustDieException;
-import threads.exceptions.OuchIFoundThirtySevenAndHenceMustDieException;
+import threads.exceptions.OuchIFoundUnluckyNumberAndHenceMustDieException;
 
 import java.util.List;
 
@@ -56,16 +56,16 @@ public class PrimeTester implements Runnable
                 break;
             }
 
-            if (number == 37)
-            {
-                throw new OuchIFoundThirtySevenAndHenceMustDieException(Thread.currentThread().getId() +
-                        " found Thirty Seven and must die.");
-            }
-
-//            if (unluckyNumbers.contains(number)) {
-//                throw new OuchIFoundUnluckyNumberAndHenceMustDieException(Thread.currentThread().getId() +
-//                        " found Unlucky Number and must die.");
+//            if (number == 37)
+//            {
+//                throw new OuchIFoundThirtySevenAndHenceMustDieException(Thread.currentThread().getId() +
+//                        " found Thirty Seven and must die.");
 //            }
+
+            if (unluckyNumbers.contains(number)) {
+                throw new OuchIFoundUnluckyNumberAndHenceMustDieException(Thread.currentThread().getId() +
+                        " found Unlucky Number and must die.");
+            }
 
             boolean isPrime = Primes.isPrime(number);
 

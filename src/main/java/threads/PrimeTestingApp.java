@@ -1,5 +1,10 @@
 package threads;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,29 +34,29 @@ public class PrimeTestingApp
             System.out.println("THREAD STARTED");
 
             // Als je een thread interrupt, kan deze een InterruptedException gooien, maar dit hoeft niet
-//            thread.interrupt();
+            thread.interrupt();
         }
 
-//        getScheduler().scheduleWithFixedDelay(() -> System.out.println("SCHEDULED TASK EXECUTING"), 3000);
+//        getScheduler().scheduleWithFixedDelay(() -> System.out.println("LAMBDA RUNNABLE"), 3000);
 //        getScheduler().scheduleWithFixedDelay(new ExampleTask(), 3000);
     }
 
-    public class ExampleTask implements Runnable {
+    public static class ExampleTask implements Runnable {
         @Override
         public void run()
         {
-            System.out.println("SCHEDULED TASK EXECUTING");
+            System.out.println("CLASS RUNNABLE");
         }
     }
 
-//    private TaskScheduler getScheduler()
-//    {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(PrimeTestingApp.class);
-//        return context.getBean(ThreadPoolTaskScheduler.class);
-//    }
-//
-//    @Bean
-//    public TaskScheduler scheduler() {
-//        return new ThreadPoolTaskScheduler();
-//    }
+    private TaskScheduler getScheduler()
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext(PrimeTestingApp.class);
+        return context.getBean(ThreadPoolTaskScheduler.class);
+    }
+
+    @Bean
+    public TaskScheduler scheduler() {
+        return new ThreadPoolTaskScheduler();
+    }
 }
