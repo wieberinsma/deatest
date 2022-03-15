@@ -53,10 +53,10 @@ public class ItemResourceTest
     @Test
     public void getJsonItemsTest()
     {
+        // Arrange
         List<ItemDTO> items = new ArrayList<>();
         items.add(new ItemDTO(1, "Bread", new String[] {"Breakfast, Lunch"}, "Delicious!"));
 
-        // Arrange
         when(itemService.getAll()).thenReturn(items);
 
         // Act
