@@ -61,7 +61,7 @@ public class ExceptionMachine
 
     private void interrupt() throws InterruptedException
     {
-        throw new InterruptedException();
+        throw new InterruptedException("INTERRUPT!");
     }
 
 }

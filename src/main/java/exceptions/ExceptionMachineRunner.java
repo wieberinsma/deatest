@@ -8,8 +8,8 @@ public class ExceptionMachineRunner
 
 //        exceptionMachine.rethrowException();
 
-        System.out.println(exceptionMachine.finallyWithReturn());
-//
+        exceptionMachine.finallyWithReturn();
+
 //        exceptionMachine.tryWithResources();
     }
 }

@@ -26,8 +26,8 @@ public class StreamExamples
 //        f1();
 //        f3();
 //        f10();
-//        f11();
-        f_par();
+        f11();
+//        f_par();
     }
 
     public void example()
@@ -130,28 +130,36 @@ public class StreamExamples
                 }).forEach(s -> System.out.println("forEach: " + s));
     }
 
+    /**
+     * Vertical vs horizontal iteration resp. stateless vs. stateful (e.g. sorted()) operations. Sorted makes the
+     * entire Stream stateful here; compare breakpoint hits of map/anyMatch. Because sorting is done intermediately and
+     * the stream ends in a terminating operation, the entire stream is consumed for the sort (made stateful)
+     */
     static void f10()
     {
-        // Vertical vs horizontal iteration resp. stateless vs. stateful (e.g. sorted()) operations
         Stream.of("d2", "a2", "b1", "b3", "c")
                 .map(s ->
                 {
                     return s.toUpperCase();
                 })
-                .sorted()
+//                .sorted()
                 .anyMatch(s ->
                 {
                     return s.startsWith("A");
                 });
     }
 
+    /**
+     * Hint: none of the elements in the Stream can _not_ match 'true', since it's always true. So the first element
+     * causes the noneMatch to immediately return false.
+     */
     static void f11()
     {
         Stream<String> stream =
                 Stream.of("d2", "a2", "b1", "b3", "c")
                         .filter(s -> s.startsWith("a"));
 
-        System.out.println(stream.anyMatch(s -> true));
+//        System.out.println(stream.anyMatch(s -> true));
         System.out.println(stream.noneMatch(s -> true));
     }
 

@@ -152,17 +152,17 @@ public class OrdersWriterTest
     void multipleOrdersWithDifferentSizesAndDifferentColorsReturnsCorrectJsonString()
     {
         // Arrange
-        order111.addProduct(new Product("Shirt", 4, 4, 2.99, "TWD"));
-        order111.addProduct(new Product("Shirt", 5, 5, 2.99, "TWD"));
-        order111.addProduct(new Product("Shirt", 6, 6, 2.99, "TWD"));
-        order111.addProduct(new Product("Shirt", 7, 7, 2.99, "TWD"));
+        order111.addProduct(new Product("Shirt", 4, 0, 2.99, "TWD"));
+        order111.addProduct(new Product("Shirt", 5, -1, 2.99, "TWD"));
+        order111.addProduct(new Product("Shirt", 0, 6, 2.99, "TWD"));
+        order111.addProduct(new Product("Shirt", -1, 7, 2.99, "TWD"));
 
         var ordersWriter = new OrdersWriter(orders);
 
-        var order111JsonPart1 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"size\": \"L\", \"price\": 2.99, \"currency\": \"TWD\"}";
-        var order111JsonPart2 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"size\": \"XL\", \"price\": 2.99, \"currency\": \"TWD\"}";
+        var order111JsonPart1 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"size\": \"Invalid Size\", \"price\": 2.99, \"currency\": \"TWD\"}";
+        var order111JsonPart2 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"price\": 2.99, \"currency\": \"TWD\"}";
         var order111JsonPart3 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"size\": \"XXL\", \"price\": 2.99, \"currency\": \"TWD\"}";
-        var order111JsonPart4 = "{\"code\": \"Shirt\", \"color\": \"no color\", \"size\": \"Invalid Size\", \"price\": 2.99, \"currency\": \"TWD\"}";
+        var order111JsonPart4 = "{\"code\": \"Shirt\", \"size\": \"Invalid Size\", \"price\": 2.99, \"currency\": \"TWD\"}";
 
         // Act
         var ordersContent = ordersWriter.getContents();
