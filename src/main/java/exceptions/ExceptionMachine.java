@@ -14,7 +14,7 @@ public class ExceptionMachine
         }
         catch (InterruptedException e)
         {
-            e.printStackTrace();
+            throw new EndOfTheWorldException(e.getMessage(), e.getCause());
         }
     }
 
