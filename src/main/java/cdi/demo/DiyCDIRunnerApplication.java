@@ -6,6 +6,7 @@ import cdi.demo.annotations.DiyPath;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,8 @@ public class DiyCDIRunnerApplication
 {
     private static final String PACKAGE_TO_SCAN = "cdi.demo";
 
+    Reflections ref = new Reflections(DiyCDIRunnerApplication.PACKAGE_TO_SCAN);
+
     public static void main(String[] args)
     {
         var runner = new DiyCDIRunnerApplication();
@@ -55,7 +58,7 @@ public class DiyCDIRunnerApplication
 
             for (var instance : jaxRSInstances)
             {
-                scanForGetMethodsAndCall(instance);
+                scanForInjectableTestMethodsAndCall(instance);
             }
 
         }
@@ -68,9 +71,6 @@ public class DiyCDIRunnerApplication
     private Set<Class<?>> findAllJAXRSClasses()
     {
         System.out.println("Scanning for classes...");
-
-        // Create a new instance of Relections. This is a helper class.
-        var ref = new Reflections(DiyCDIRunnerApplication.PACKAGE_TO_SCAN);
 
         // Get all classes annotated with @DiyPath. This will gather
         // all classes in "packageToScan" for classes annotated with "DiyPath".
@@ -125,17 +125,28 @@ public class DiyCDIRunnerApplication
                 // We assume the method has exactly one parameter
                 var classOfParameter = parameterTypes[0];
 
-                // Again we create an instance through the constructor
-                var constructorOfDependency = classOfParameter.getConstructor();
-                var instanceOfDependency = constructorOfDependency.newInstance();
+                // Find the implementation for this class
+                var implementingClass = new ArrayList<>(ref.getSubTypesOf(classOfParameter)).get(0);
 
-                // In this case, we pass the dependency as the second argument of the invoke method
-                method.invoke(instance, instanceOfDependency);
+                if (implementingClass != null)
+                {
+                    // Again we create an instance through the constructor
+                    var constructorOfDependency = implementingClass.getConstructor();
+                    var instanceOfDependency = constructorOfDependency.newInstance();
+
+                    // In this case, we pass the dependency as the second argument of the invoke method
+                    method.invoke(instance, instanceOfDependency);
+                }
+                else
+                {
+                    System.out.println("No implementing class found for: " + classOfParameter);
+                }
             }
         }
     }
 
-    private void scanForGetMethodsAndCall(Object instance) throws InvocationTargetException, IllegalAccessException
+    private void scanForInjectableTestMethodsAndCall(Object instance) throws InvocationTargetException,
+            IllegalAccessException
     {
         for (var method : instance.getClass().getMethods())
         {

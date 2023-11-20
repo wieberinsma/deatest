@@ -4,17 +4,17 @@ class Counter implements Runnable
 {
     private int c = 0;
 
-    public void increment()
+    public synchronized void increment()
     {
         c++;
     }
 
-    public void decrement()
+    public synchronized void decrement()
     {
         c--;
     }
 
-    public int getValue()
+    public synchronized int getValue()
     {
         return c;
     }
@@ -22,14 +22,21 @@ class Counter implements Runnable
     @Override
     public void run()
     {
-        String threadName =  Thread.currentThread().getName();
+        String threadName = Thread.currentThread().getName();
+
 
         //incrementing
         this.increment();
-        System.out.println("Value for " + threadName + ": " + this.getValue());
+        synchronized (this)
+        {
+            System.out.println("Value for " + threadName + ": " + this.getValue());
+        }
 
         //decrementing
         this.decrement();
-        System.out.println("Value for " + threadName + ": " + this.getValue());
+        synchronized (this)
+        {
+            System.out.println("Value for " + threadName + ": " + this.getValue());
+        }
     }
 }

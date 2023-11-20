@@ -14,18 +14,16 @@ public class ExceptionMachine
         }
         catch (InterruptedException e)
         {
-            throw new EndOfTheWorldException(e.getMessage(), e.getCause());
+            throw new EndOfTheWorldException(e.getMessage(), e);
         }
     }
 
-    public String finallyWithReturn() {
+    public void finallyWithReturn() {
         System.out.println("Booting machine...");
 
         try {
             System.out.println("Increasing heat...");
             explode();
-
-            return "System has exploded!";
         }
         catch(IllegalArgumentException ex) {
             System.out.println("Unable to recover...");
@@ -37,13 +35,6 @@ public class ExceptionMachine
         {
             System.out.println("Shutdown initiated...");
         }
-
-        return "All good!";
-    }
-
-    private void explode()
-    {
-        throw new ExplosionException("Heat too intense, EXPLOSION!!");
     }
 
     public void tryWithResources() {
@@ -57,6 +48,11 @@ public class ExceptionMachine
         {
             e.printStackTrace();
         }
+    }
+
+    private void explode()
+    {
+        throw new ExplosionException("Heat too intense, EXPLOSION!!");
     }
 
     private void interrupt() throws InterruptedException

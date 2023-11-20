@@ -27,9 +27,9 @@ public class PrimeTestingApp
         for (int i = 1; i <= CPU_CORE_NUMBER; i++)
         {
             var tester = new PrimeTester(numberUnderTest, HIGHEST_NUMBER_TO_TEST);
-            var thread = new Thread(tester);
+            var thread1 = new Thread(tester);
 
-            thread.start();
+            thread1.start();
 //            thread.run(); // NIET GEBRUIKEN!
             System.out.println("THREAD STARTED");
 
@@ -37,8 +37,8 @@ public class PrimeTestingApp
 //            thread.interrupt();
         }
 
-//        getScheduler().scheduleWithFixedDelay(() -> System.out.println("LAMBDA RUNNABLE"), 3000);
-//        getScheduler().scheduleWithFixedDelay(new ExampleTask(), 3000);
+//        getScheduler().scheduleWithFixedDelay(() -> System.out.println("LAMBDA RUNNABLE"), Duration.ZERO);
+//        getScheduler().scheduleWithFixedDelay(new ExampleTask(), Duration.ZERO);
     }
 
     public static class ExampleTask implements Runnable {

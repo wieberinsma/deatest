@@ -21,13 +21,19 @@ public class StreamExamples
     public static void main(String[] args)
     {
         StreamExamples examples = new StreamExamples();
-        examples.example();
+//        examples.example();
 
-//        f1();
-//        f3();
+//        examples.f1();
+//        f2();
+//        f6();
+//        f8();
+//        f9();
 //        f10();
-        f11();
-//        f_par();
+//        f11();
+//        f14();
+//        f15();
+//        f16();
+        f_par();
     }
 
     public void example()
@@ -56,15 +62,22 @@ public class StreamExamples
 //        hobbitList.forEach(hobbit -> hobbitList.remove(hobbit));
     }
 
-    static void f1()
+    void f1()
     {
         List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
 
+        // leaves a stream with only C2 and C1
         myList.stream() // creates stream
-                .filter(element -> element.startsWith("c")) //  leaves a stream with only c2 and c1
-                .map(String::toUpperCase) // leaves a stream with only C2 and C1
+                .filter(this::startsWith_C_Character) //  leaves a stream with only c2 and c1
+                .map(String::toUpperCase)
                 .sorted() // sorts so, C1 and C2 change order
-                .forEach(System.out::println); // terminate the Stream
+//                .anyMatch(element -> element.startsWith("b"));
+                .forEach(element -> System.out.println(element)); // terminate the Stream
+//        System.out.println(backToList);
+    }
+
+    boolean startsWith_C_Character(String s) {
+        return s.toLowerCase().startsWith("c");
     }
 
     static void f2()
@@ -96,10 +109,14 @@ public class StreamExamples
                 .ifPresent(System.out::println);
     }
 
+    /**
+     * Let op met het maken van specifieke type Streams
+     */
     static void f6()
     {
         Stream.of("a1", "a2", "a3")
                 .map(s -> s.substring(1))
+//                .map(s -> Integer.parseInt(s))
                 .mapToInt(Integer::parseInt)
                 .max()
                 .ifPresent(System.out::println);
