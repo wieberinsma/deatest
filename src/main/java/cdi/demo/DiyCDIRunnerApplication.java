@@ -40,8 +40,7 @@ public class DiyCDIRunnerApplication
 
     public static void main(String[] args)
     {
-        var runner = new DiyCDIRunnerApplication();
-        runner.runDiyCdiDemo();
+        new DiyCDIRunnerApplication().runDiyCdiDemo();
     }
 
     private void runDiyCdiDemo()
@@ -53,13 +52,8 @@ public class DiyCDIRunnerApplication
             for (var instance : instancesHavingDependencies)
             {
                 createDependenciesAndInject(instance);
-            }
-
-            for (var instance : instancesHavingDependencies)
-            {
                 callDependencyMethod(instance);
             }
-
         }
         catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
@@ -67,6 +61,7 @@ public class DiyCDIRunnerApplication
         }
     }
 
+    // Find all classes that may have dependencies and instantiate those (without dependencies)
     public Set<Object> createInstancesHavingDependencies() throws NoSuchMethodException, IllegalAccessException,
             InstantiationException, InvocationTargetException
     {
@@ -87,6 +82,7 @@ public class DiyCDIRunnerApplication
                 .collect(Collectors.toSet());
     }
 
+    // Find all dependency setter-methods, instantiate the method argument and 'inject' it
     private void createDependenciesAndInject(Object instance) throws NoSuchMethodException, IllegalAccessException,
             InvocationTargetException, InstantiationException
     {
@@ -106,6 +102,7 @@ public class DiyCDIRunnerApplication
         }
     }
 
+    // Test whether the dependency method can be called
     private void callDependencyMethod(Object instance) throws InvocationTargetException,
             IllegalAccessException
     {
