@@ -7,8 +7,8 @@ import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * This class gives a brief demonstration of the possible Java Code behind the mysterious workings of JAX-RS and CDI.
@@ -48,17 +48,16 @@ public class DiyCDIRunnerApplication
     {
         try
         {
-            var jaxRSClasses = findAllJAXRSClasses();
-            var jaxRSInstances = createJAXRSInstances(jaxRSClasses);
+            var instancesHavingDependencies = createInstancesHavingDependencies();
 
-            for (var instance : jaxRSInstances)
+            for (var instance : instancesHavingDependencies)
             {
-                scanForInjectableSettersAndInject(instance);
+                createDependenciesAndInject(instance);
             }
 
-            for (var instance : jaxRSInstances)
+            for (var instance : instancesHavingDependencies)
             {
-                scanForInjectableTestMethodsAndCall(instance);
+                callDependencyMethod(instance);
             }
 
         }
@@ -68,84 +67,46 @@ public class DiyCDIRunnerApplication
         }
     }
 
-    private Set<Class<?>> findAllJAXRSClasses()
+    public Set<Object> createInstancesHavingDependencies() throws NoSuchMethodException, IllegalAccessException,
+            InstantiationException, InvocationTargetException
     {
-        System.out.println("Scanning for classes...");
 
-        // Get all classes annotated with @DiyPath. This will gather
-        // all classes in "packageToScan" for classes annotated with "DiyPath".
-        var jaxRSClasses = ref.getTypesAnnotatedWith(DiyPath.class);
-
-        // Print info on all found classes. Just for convenience...
-        for (Class<?> clazz : jaxRSClasses)
-        {
-            var annotation = clazz.getAnnotation(DiyPath.class);
-            System.out.printf("Found DIY JAX-RS Class: %s, for path: %s%n", clazz.getSimpleName(), annotation.value());
-        }
-
-        return jaxRSClasses;
+        return ref.getTypesAnnotatedWith(DiyPath.class).stream()
+                .map(clazz ->
+                {
+                    try
+                    {
+                        return (Object) clazz.getConstructor().newInstance();
+                    }
+                    catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                           NoSuchMethodException ex)
+                    {
+                        return null;
+                    }
+                })
+                .collect(Collectors.toSet());
     }
 
-    public Set<Object> createJAXRSInstances(Set<Class<?>> classes) throws NoSuchMethodException,
-            IllegalAccessException, InstantiationException, InvocationTargetException
+    private void createDependenciesAndInject(Object instance) throws NoSuchMethodException, IllegalAccessException,
+            InvocationTargetException, InstantiationException
     {
-        // Create the HashSet that will be filled with all created Instances
-        var jaxRSInstances = new HashSet<>();
-
-        for (var clazz : classes)
-        {
-            // Use the Constructor to create a new Instance
-            var object = clazz.getConstructor().newInstance();
-
-            // Add the created instance to the HashSet
-            jaxRSInstances.add(object);
-
-            // Report proudly
-            System.out.println("Created instance: " + object);
-        }
-
-        return jaxRSInstances;
-    }
-
-    private void scanForInjectableSettersAndInject(Object instance) throws NoSuchMethodException,
-            IllegalAccessException, InvocationTargetException, InstantiationException
-    {
-        // Report proudly
-        System.out.println("Now scanning: " + instance);
-
-        // Iterate though all methods from the given Object
         for (var method : instance.getClass().getMethods())
         {
-            // Only continue for those that have the "DiyInject" annotation
             if (method.isAnnotationPresent(DiyInject.class))
             {
-                // Get the parameter of the method, so we can use it to create an Instance and perform DI
-                Class<?>[] parameterTypes = method.getParameterTypes();
+                var classOfMethodArgument = method.getParameterTypes()[0];
 
-                // We assume the method has exactly one parameter
-                var classOfParameter = parameterTypes[0];
-
-                // Find the implementation for this class
-                var implementingClass = new ArrayList<>(ref.getSubTypesOf(classOfParameter)).get(0);
-
+                var implementingClass = new ArrayList<>(ref.getSubTypesOf(classOfMethodArgument)).get(0);
                 if (implementingClass != null)
                 {
-                    // Again we create an instance through the constructor
-                    var constructorOfDependency = implementingClass.getConstructor();
-                    var instanceOfDependency = constructorOfDependency.newInstance();
-
-                    // In this case, we pass the dependency as the second argument of the invoke method
+                    var instanceOfDependency = implementingClass.getConstructor().newInstance();
                     method.invoke(instance, instanceOfDependency);
-                }
-                else
-                {
-                    System.out.println("No implementing class found for: " + classOfParameter);
                 }
             }
         }
     }
 
-    private void scanForInjectableTestMethodsAndCall(Object instance) throws InvocationTargetException,
+    private void callDependencyMethod(Object instance) throws InvocationTargetException,
             IllegalAccessException
     {
         for (var method : instance.getClass().getMethods())
@@ -153,7 +114,6 @@ public class DiyCDIRunnerApplication
             if (method.isAnnotationPresent(DiyGET.class))
             {
                 var response = method.invoke(instance);
-
                 System.out.printf("Calling method %s(), gives response: %s\n", method.getName(), response);
             }
         }
