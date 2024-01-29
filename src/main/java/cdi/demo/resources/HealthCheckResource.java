@@ -1,12 +1,12 @@
 package cdi.demo.resources;
 
-import cdi.demo.annotations.DiyGET;
-import cdi.demo.annotations.DiyPath;
+import cdi.demo.annotations.DiyTest;
+import cdi.demo.annotations.DiyClass;
 
-@DiyPath("/health")
+@DiyClass("/health")
 public class HealthCheckResource
 {
-    @DiyGET
+    @DiyTest
     public String healthy()
     {
         return "Up & Running";

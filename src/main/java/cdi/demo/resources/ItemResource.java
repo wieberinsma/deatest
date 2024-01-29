@@ -1,14 +1,14 @@
 package cdi.demo.resources;
 
-import cdi.demo.annotations.DiyGET;
+import cdi.demo.annotations.DiyTest;
 import cdi.demo.annotations.DiyInject;
-import cdi.demo.annotations.DiyPath;
+import cdi.demo.annotations.DiyClass;
 import cdi.demo.services.ItemService;
 import cdi.demo.services.dto.ItemDTO;
 
 import java.util.List;
 
-@DiyPath("/items")
+@DiyClass("/items")
 public class ItemResource
 {
     private ItemService itemService;
@@ -19,7 +19,7 @@ public class ItemResource
         this.itemService = itemService;
     }
 
-    @DiyGET
+    @DiyTest
     public List<ItemDTO> getJsonItems()
     {
         return itemService.getAll();

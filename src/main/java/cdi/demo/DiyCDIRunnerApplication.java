@@ -1,8 +1,8 @@
 package cdi.demo;
 
-import cdi.demo.annotations.DiyGET;
+import cdi.demo.annotations.DiyTest;
 import cdi.demo.annotations.DiyInject;
-import cdi.demo.annotations.DiyPath;
+import cdi.demo.annotations.DiyClass;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,20 +16,20 @@ import java.util.stream.Collectors;
  * <p>
  * This Class does the following things:
  * <ul>
- *     <li>It scans all Classes in Package {@code nl.han.ica.oose.dea} for the Annotation {@link DiyPath}</li>
- *     <li>It creates instances of all found Classes</li>
+ *     <li>It scans all Classes for the Annotation {@link DiyClass}</li>
+ *     <li>It creates instances of all found Classes that require dependency injection</li>
  *     <li>It scans all Instances for methods that are annotated with {@link DiyInject}</li>
  *     <li>It determines the type of the parameter of the method, annotated with {@link DiyInject}</li>
  *     <li>It creates a new instance with the same type as that parameter</li>
- *     <li>It calls the method annotated with {@link DiyInject} with that newly created instance</li>
- *     <li>It scans all Instances for methods that are annotated with {@link DiyGET}</li>
- *     <li>It calls all methods annotated with {@link DiyGET}</li>
+ *     <li>It calls the method annotated with {@link DiyInject} with that newly created instance to set dependency</li>
+ *     <li>It scans all Instances for methods that are annotated with {@link DiyTest}</li>
+ *     <li>It calls all methods annotated with {@link DiyTest}</li>
  * </ul>
  * <p>
  * Notice how this code is rather limited and assumes a lot about the following things:
  * <ul>
  *     <li>Only Setter injection is supported. Constructor en field injection is not</li>
- *     <li>The Constructor of the class annotated with {@link DiyPath} and the dependency must be empty </li>
+ *     <li>The Constructor of the class annotated with {@link DiyClass} and the dependency must be empty </li>
  * </ul>
  */
 public class DiyCDIRunnerApplication
@@ -66,7 +66,7 @@ public class DiyCDIRunnerApplication
             InstantiationException, InvocationTargetException
     {
 
-        return ref.getTypesAnnotatedWith(DiyPath.class).stream()
+        return ref.getTypesAnnotatedWith(DiyClass.class).stream()
                 .map(clazz ->
                 {
                     try
@@ -108,7 +108,7 @@ public class DiyCDIRunnerApplication
     {
         for (var method : instance.getClass().getMethods())
         {
-            if (method.isAnnotationPresent(DiyGET.class))
+            if (method.isAnnotationPresent(DiyTest.class))
             {
                 var response = method.invoke(instance);
                 System.out.printf("Calling method %s(), gives response: %s\n", method.getName(), response);
