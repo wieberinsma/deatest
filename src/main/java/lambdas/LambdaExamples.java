@@ -5,7 +5,8 @@ import java.util.stream.Stream;
 
 public class LambdaExamples
 {
-    private final Stream<String> hobbitStream = Arrays.stream(new String[] {"Frodo", "Samwise", "Merry", "Pippin"});
+    private final Stream<String> hobbitStream
+            = Arrays.stream(new String[] {"Frodo", "Samwise", "Merry", "Pippin"});
 
     public static void main(String[] args)
     {
@@ -16,7 +17,7 @@ public class LambdaExamples
     public void example()
     {
         // Op dit moment kan hier nog geen lambda van worden gemaakt, omdat de interface 2 methodes heeft
-        LikeFunction<String> likeFunction = hobbit -> hobbit.startsWith("Fro");
+        LikeFunction<String> likeFunction = hobbit -> hobbit.startsWith("M");
 
         // Methode referentie met eigen functional interface
         hobbitStream
@@ -33,13 +34,14 @@ public class LambdaExamples
         Runnable lambdaZonderArgument = () -> System.out.println("Test");
     }
 
-    static boolean likeAsFunction(String hobbit) {
-        return hobbit.startsWith("Fro");
-    }
-
     @FunctionalInterface
     public interface LikeFunction<String>
     {
         boolean like(String hobbit);
+    }
+
+    static boolean likeAsFunction(String hobbit)
+    {
+        return hobbit.startsWith("Fro");
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+
 @Component
 public class PrimeTestingApp
 {
@@ -38,7 +40,7 @@ public class PrimeTestingApp
         }
 
 //        getScheduler().scheduleWithFixedDelay(() -> System.out.println("LAMBDA RUNNABLE"), Duration.ZERO);
-//        getScheduler().scheduleWithFixedDelay(new ExampleTask(), Duration.ZERO);
+        getScheduler().scheduleWithFixedDelay(new ExampleTask(), Duration.ofSeconds(1));
     }
 
     public static class ExampleTask implements Runnable {

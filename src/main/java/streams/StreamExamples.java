@@ -29,11 +29,12 @@ public class StreamExamples
 //        f8();
 //        f9();
 //        f10();
-//        f11();
+        f11();
+//        f12();
 //        f14();
 //        f15();
 //        f16();
-        f_par();
+//        f_par();
     }
 
     public void example()
@@ -187,7 +188,6 @@ public class StreamExamples
                         .filter(s -> s.startsWith("a"));
         System.out.println(streamSupplier.get().anyMatch(s -> true));
         System.out.println(streamSupplier.get().noneMatch(s -> true));
-
     }
 
     static void f13()
