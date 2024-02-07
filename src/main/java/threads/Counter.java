@@ -19,24 +19,18 @@ class Counter implements Runnable
         return c;
     }
 
+    /**
+     * Let op dat je _alles_ synchronized maakt. Gevolg regel 32/36: lijkt niet goed te gaan (maar is wel zo)
+     */
     @Override
     public void run()
     {
         String threadName = Thread.currentThread().getName();
 
-
-        //incrementing
         this.increment();
-        synchronized (this)
-        {
-            System.out.println("Value for " + threadName + ": " + this.getValue());
-        }
+        System.out.println("Value for " + threadName + ": " + this.getValue());
 
-        //decrementing
         this.decrement();
-        synchronized (this)
-        {
-            System.out.println("Value for " + threadName + ": " + this.getValue());
-        }
+        System.out.println("Value for " + threadName + ": " + this.getValue());
     }
 }
