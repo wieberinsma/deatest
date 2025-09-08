@@ -2,5 +2,5 @@ package lambdas.bewd;
 
 public interface Printable
 {
-    void print(String name);
+    void print(String prefix);
 }
